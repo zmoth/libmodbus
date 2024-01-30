@@ -1,0 +1,1 @@
+add_subdirectory(libmodbus_tcp_master)

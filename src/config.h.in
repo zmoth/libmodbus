@@ -131,7 +131,7 @@
 #define PACKAGE_NAME "libmodbus"
 
 /* Define to the full name and version of this package. */
-#define PACKAGE_STRING "libmodbus @LIBMODBUS_VERSION@"
+#define PACKAGE_STRING "libmodbus @PROJECT_VERSION@"
 
 /* Define to the one symbol short name of this package. */
 #define PACKAGE_TARNAME "libmodbus"
@@ -140,7 +140,7 @@
 #define PACKAGE_URL ""
 
 /* Define to the version of this package. */
-#define PACKAGE_VERSION "@LIBMODBUS_VERSION@"
+#define PACKAGE_VERSION "@PROJECT_VERSION@"
 
 /* Define to 1 if you have the ANSI C header files. */
 #define STDC_HEADERS 1
@@ -149,7 +149,7 @@
 /* #undef TIME_WITH_SYS_TIME */
 
 /* Version number of package */
-#define VERSION "@LIBMODBUS_VERSION@"
+#define VERSION "@PROJECT_VERSION@"
 
 /* Define to empty if `const' does not conform to ANSI C. */
 /* #undef const */
