@@ -1,1 +1,1 @@
-add_subdirectory(libmodbus_tcp_master)
+add_subdirectory(modbus_tcp_master)

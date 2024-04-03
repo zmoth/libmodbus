@@ -27,14 +27,14 @@ string(REGEX MATCH "^[0-9]+(\\.[0-9]+)*" PROJECT_VERSION ${PROJECT_VERSION})
 
 message(STATUS ${PROJECT_VERSION})
 
-set(PROJECT_DESCRIPTION "实时数据处理框架")
+set(PROJECT_DESCRIPTION "modbus")
 set(PROJECT_HOMEPAGE_URL "https://zmoth.top")
 
 #
 # 配置工程信息
 #
 project(
-    libmodbus
+    modbus
     VERSION ${PROJECT_VERSION}
     DESCRIPTION ${PROJECT_DESCRIPTION}
     HOMEPAGE_URL ${PROJECT_HOMEPAGE_URL}
@@ -67,10 +67,6 @@ include(GNUInstallDirs)
 
 # 如果此项目作为其他项目的第三方库，以下的配置不生效
 if(${PROJECT_IS_TOP_LEVEL})
-    # 禁止在源目录编译以及修改，可以在不小心在当前目录编译的时候，报错退出，防止污染源代码：
-    set(CMAKE_DISABLE_IN_SOURCE_BUILD ON)
-    set(CMAKE_DISABLE_SOURCE_CHANGES ON)
-
     # 设置输出路径
     set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/${CMAKE_INSTALL_LIBDIR}) # 静态库的文件夹位置
     set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/${CMAKE_INSTALL_LIBDIR}) # 动态库的文件夹位置
@@ -113,29 +109,23 @@ add_subdirectory(src) # 添加源文件
 # 添加配置头文件，将CMake中的版本等信息转换为头文件
 configure_file(
     "${CMAKE_CURRENT_SOURCE_DIR}/src/modbus-version.h.in"
-    "${CMAKE_CURRENT_BINARY_DIR}/${PROJECT_NAME}/modbus-version.h"
+    "${CMAKE_CURRENT_SOURCE_DIR}/src/modbus-version.h"
 )
 configure_file(
     "${CMAKE_CURRENT_SOURCE_DIR}/src/config.h.in"
-    "${CMAKE_CURRENT_BINARY_DIR}/${PROJECT_NAME}/config.h"
+    "${CMAKE_CURRENT_SOURCE_DIR}/src/config.h"
 )
 
 # 生成输出头文件
 include(GenerateExportHeader)
 generate_export_header(
     ${PROJECT_NAME}
-    EXPORT_FILE_NAME "${CMAKE_CURRENT_BINARY_DIR}/${PROJECT_NAME}/export.h"
+    EXPORT_FILE_NAME "${CMAKE_CURRENT_SOURCE_DIR}/src/export.h"
 )
 
 # 头文件路径
 target_include_directories(
     ${PROJECT_NAME}
-    PUBLIC $<INSTALL_INTERFACE:${CMAKE_BINARY_DIR}/include>
-
-    # 自动生成的头文件
-    PRIVATE $<BUILD_INTERFACE:${CMAKE_CURRENT_BINARY_DIR}/${PROJECT_NAME}>
-
-    # 所有头文件都希望能够直接调用到
     PRIVATE $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/src>
 )
 
@@ -164,4 +154,11 @@ set_target_properties(
 #
 if(${PROJECT_NAME}_BUILD_EXAMPLES)
     add_subdirectory(examples)
+endif()
+
+#
+# ########### 测试 ###########
+#
+if(${PROJECT_NAME}_BUILD_TESTING)
+    add_subdirectory(tests)
 endif()

@@ -40,13 +40,13 @@ MODBUS_BEGIN_DECLS
  */
 #define MODBUS_TCP_MAX_ADU_LENGTH 260
 
-LIBMODBUS_EXPORT modbus_t *modbus_new_tcp(const char *ip_address, int port);
-LIBMODBUS_EXPORT int modbus_tcp_listen(modbus_t *ctx, int nb_connection);
-LIBMODBUS_EXPORT int modbus_tcp_accept(modbus_t *ctx, int *s);
+MODBUS_EXPORT modbus_t *modbus_new_tcp(const char *ip_address, int port);
+MODBUS_EXPORT int modbus_tcp_listen(modbus_t *ctx, int nb_connection);
+MODBUS_EXPORT int modbus_tcp_accept(modbus_t *ctx, int *s);
 
-LIBMODBUS_EXPORT modbus_t *modbus_new_tcp_pi(const char *node, const char *service);
-LIBMODBUS_EXPORT int modbus_tcp_pi_listen(modbus_t *ctx, int nb_connection);
-LIBMODBUS_EXPORT int modbus_tcp_pi_accept(modbus_t *ctx, int *s);
+MODBUS_EXPORT modbus_t *modbus_new_tcp_pi(const char *node, const char *service);
+MODBUS_EXPORT int modbus_tcp_pi_listen(modbus_t *ctx, int nb_connection);
+MODBUS_EXPORT int modbus_tcp_pi_accept(modbus_t *ctx, int *s);
 
 MODBUS_END_DECLS
 

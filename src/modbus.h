@@ -175,66 +175,63 @@ typedef enum {
     MODBUS_QUIRK_ALL = 0xFF
 } modbus_quirks;
 
-LIBMODBUS_EXPORT int modbus_set_slave(modbus_t *ctx, int slave);
-LIBMODBUS_EXPORT int modbus_get_slave(modbus_t *ctx);
-LIBMODBUS_EXPORT int modbus_set_error_recovery(modbus_t *ctx,
-                                               modbus_error_recovery_mode error_recovery);
-LIBMODBUS_EXPORT int modbus_set_socket(modbus_t *ctx, int s);
-LIBMODBUS_EXPORT int modbus_get_socket(modbus_t *ctx);
+MODBUS_EXPORT int modbus_set_slave(modbus_t *ctx, int slave);
+MODBUS_EXPORT int modbus_get_slave(modbus_t *ctx);
+MODBUS_EXPORT int modbus_set_error_recovery(modbus_t *ctx,
+                                            modbus_error_recovery_mode error_recovery);
+MODBUS_EXPORT int modbus_set_socket(modbus_t *ctx, int s);
+MODBUS_EXPORT int modbus_get_socket(modbus_t *ctx);
 
-LIBMODBUS_EXPORT int
+MODBUS_EXPORT int
 modbus_get_response_timeout(modbus_t *ctx, uint32_t *to_sec, uint32_t *to_usec);
-LIBMODBUS_EXPORT int
+MODBUS_EXPORT int
 modbus_set_response_timeout(modbus_t *ctx, uint32_t to_sec, uint32_t to_usec);
 
-LIBMODBUS_EXPORT int
+MODBUS_EXPORT int
 modbus_get_byte_timeout(modbus_t *ctx, uint32_t *to_sec, uint32_t *to_usec);
-LIBMODBUS_EXPORT int
+MODBUS_EXPORT int
 modbus_set_byte_timeout(modbus_t *ctx, uint32_t to_sec, uint32_t to_usec);
 
-LIBMODBUS_EXPORT int
+MODBUS_EXPORT int
 modbus_get_indication_timeout(modbus_t *ctx, uint32_t *to_sec, uint32_t *to_usec);
-LIBMODBUS_EXPORT int
+MODBUS_EXPORT int
 modbus_set_indication_timeout(modbus_t *ctx, uint32_t to_sec, uint32_t to_usec);
 
-LIBMODBUS_EXPORT int modbus_get_header_length(modbus_t *ctx);
+MODBUS_EXPORT int modbus_get_header_length(modbus_t *ctx);
 
-LIBMODBUS_EXPORT int modbus_connect(modbus_t *ctx);
-LIBMODBUS_EXPORT void modbus_close(modbus_t *ctx);
+MODBUS_EXPORT int modbus_connect(modbus_t *ctx);
+MODBUS_EXPORT void modbus_close(modbus_t *ctx);
 
-LIBMODBUS_EXPORT void modbus_free(modbus_t *ctx);
+MODBUS_EXPORT void modbus_free(modbus_t *ctx);
 
-LIBMODBUS_EXPORT int modbus_flush(modbus_t *ctx);
-LIBMODBUS_EXPORT int modbus_set_debug(modbus_t *ctx, int flag);
+MODBUS_EXPORT int modbus_flush(modbus_t *ctx);
+MODBUS_EXPORT int modbus_set_debug(modbus_t *ctx, int flag);
 
-LIBMODBUS_EXPORT const char *modbus_strerror(int errnum);
+MODBUS_EXPORT const char *modbus_strerror(int errnum);
 
-LIBMODBUS_EXPORT int modbus_read_bits(modbus_t *ctx, int addr, int nb, uint8_t *dest);
-LIBMODBUS_EXPORT int
-modbus_read_input_bits(modbus_t *ctx, int addr, int nb, uint8_t *dest);
-LIBMODBUS_EXPORT int
-modbus_read_registers(modbus_t *ctx, int addr, int nb, uint16_t *dest);
-LIBMODBUS_EXPORT int
+MODBUS_EXPORT int modbus_read_bits(modbus_t *ctx, int addr, int nb, uint8_t *dest);
+MODBUS_EXPORT int modbus_read_input_bits(modbus_t *ctx, int addr, int nb, uint8_t *dest);
+MODBUS_EXPORT int modbus_read_registers(modbus_t *ctx, int addr, int nb, uint16_t *dest);
+MODBUS_EXPORT int
 modbus_read_input_registers(modbus_t *ctx, int addr, int nb, uint16_t *dest);
-LIBMODBUS_EXPORT int modbus_write_bit(modbus_t *ctx, int coil_addr, int status);
-LIBMODBUS_EXPORT int
+MODBUS_EXPORT int modbus_write_bit(modbus_t *ctx, int coil_addr, int status);
+MODBUS_EXPORT int
 modbus_write_register(modbus_t *ctx, int reg_addr, const uint16_t value);
-LIBMODBUS_EXPORT int
-modbus_write_bits(modbus_t *ctx, int addr, int nb, const uint8_t *data);
-LIBMODBUS_EXPORT int
+MODBUS_EXPORT int modbus_write_bits(modbus_t *ctx, int addr, int nb, const uint8_t *data);
+MODBUS_EXPORT int
 modbus_write_registers(modbus_t *ctx, int addr, int nb, const uint16_t *data);
-LIBMODBUS_EXPORT int
+MODBUS_EXPORT int
 modbus_mask_write_register(modbus_t *ctx, int addr, uint16_t and_mask, uint16_t or_mask);
-LIBMODBUS_EXPORT int modbus_write_and_read_registers(modbus_t *ctx,
-                                                     int write_addr,
-                                                     int write_nb,
-                                                     const uint16_t *src,
-                                                     int read_addr,
-                                                     int read_nb,
-                                                     uint16_t *dest);
-LIBMODBUS_EXPORT int modbus_report_slave_id(modbus_t *ctx, int max_dest, uint8_t *dest);
+MODBUS_EXPORT int modbus_write_and_read_registers(modbus_t *ctx,
+                                                  int write_addr,
+                                                  int write_nb,
+                                                  const uint16_t *src,
+                                                  int read_addr,
+                                                  int read_nb,
+                                                  uint16_t *dest);
+MODBUS_EXPORT int modbus_report_slave_id(modbus_t *ctx, int max_dest, uint8_t *dest);
 
-LIBMODBUS_EXPORT modbus_mapping_t *
+MODBUS_EXPORT modbus_mapping_t *
 modbus_mapping_new_start_address(unsigned int start_bits,
                                  unsigned int nb_bits,
                                  unsigned int start_input_bits,
@@ -244,27 +241,27 @@ modbus_mapping_new_start_address(unsigned int start_bits,
                                  unsigned int start_input_registers,
                                  unsigned int nb_input_registers);
 
-LIBMODBUS_EXPORT modbus_mapping_t *modbus_mapping_new(int nb_bits,
-                                                      int nb_input_bits,
-                                                      int nb_registers,
-                                                      int nb_input_registers);
-LIBMODBUS_EXPORT void modbus_mapping_free(modbus_mapping_t *mb_mapping);
+MODBUS_EXPORT modbus_mapping_t *modbus_mapping_new(int nb_bits,
+                                                   int nb_input_bits,
+                                                   int nb_registers,
+                                                   int nb_input_registers);
+MODBUS_EXPORT void modbus_mapping_free(modbus_mapping_t *mb_mapping);
 
-LIBMODBUS_EXPORT int
+MODBUS_EXPORT int
 modbus_send_raw_request(modbus_t *ctx, const uint8_t *raw_req, int raw_req_length);
 
-LIBMODBUS_EXPORT int modbus_receive(modbus_t *ctx, uint8_t *req);
+MODBUS_EXPORT int modbus_receive(modbus_t *ctx, uint8_t *req);
 
-LIBMODBUS_EXPORT int modbus_receive_confirmation(modbus_t *ctx, uint8_t *rsp);
+MODBUS_EXPORT int modbus_receive_confirmation(modbus_t *ctx, uint8_t *rsp);
 
-LIBMODBUS_EXPORT int modbus_reply(modbus_t *ctx,
-                                  const uint8_t *req,
-                                  int req_length,
-                                  modbus_mapping_t *mb_mapping);
-LIBMODBUS_EXPORT int
+MODBUS_EXPORT int modbus_reply(modbus_t *ctx,
+                               const uint8_t *req,
+                               int req_length,
+                               modbus_mapping_t *mb_mapping);
+MODBUS_EXPORT int
 modbus_reply_exception(modbus_t *ctx, const uint8_t *req, unsigned int exception_code);
-LIBMODBUS_EXPORT int modbus_enable_quirks(modbus_t *ctx, unsigned int quirks_mask);
-LIBMODBUS_EXPORT int modbus_disable_quirks(modbus_t *ctx, unsigned int quirks_mask);
+MODBUS_EXPORT int modbus_enable_quirks(modbus_t *ctx, unsigned int quirks_mask);
+MODBUS_EXPORT int modbus_disable_quirks(modbus_t *ctx, unsigned int quirks_mask);
 
 /**
  * UTILS FUNCTIONS
@@ -297,26 +294,25 @@ LIBMODBUS_EXPORT int modbus_disable_quirks(modbus_t *ctx, unsigned int quirks_ma
         ((int16_t *) (tab_int16))[(index) + 3] = (int16_t) (value);         \
     } while (0)
 
-LIBMODBUS_EXPORT void
-modbus_set_bits_from_byte(uint8_t *dest, int idx, const uint8_t value);
-LIBMODBUS_EXPORT void modbus_set_bits_from_bytes(uint8_t *dest,
-                                                 int idx,
-                                                 unsigned int nb_bits,
-                                                 const uint8_t *tab_byte);
-LIBMODBUS_EXPORT uint8_t modbus_get_byte_from_bits(const uint8_t *src,
-                                                   int idx,
-                                                   unsigned int nb_bits);
-LIBMODBUS_EXPORT float modbus_get_float(const uint16_t *src);
-LIBMODBUS_EXPORT float modbus_get_float_abcd(const uint16_t *src);
-LIBMODBUS_EXPORT float modbus_get_float_dcba(const uint16_t *src);
-LIBMODBUS_EXPORT float modbus_get_float_badc(const uint16_t *src);
-LIBMODBUS_EXPORT float modbus_get_float_cdab(const uint16_t *src);
+MODBUS_EXPORT void modbus_set_bits_from_byte(uint8_t *dest, int idx, const uint8_t value);
+MODBUS_EXPORT void modbus_set_bits_from_bytes(uint8_t *dest,
+                                              int idx,
+                                              unsigned int nb_bits,
+                                              const uint8_t *tab_byte);
+MODBUS_EXPORT uint8_t modbus_get_byte_from_bits(const uint8_t *src,
+                                                int idx,
+                                                unsigned int nb_bits);
+MODBUS_EXPORT float modbus_get_float(const uint16_t *src);
+MODBUS_EXPORT float modbus_get_float_abcd(const uint16_t *src);
+MODBUS_EXPORT float modbus_get_float_dcba(const uint16_t *src);
+MODBUS_EXPORT float modbus_get_float_badc(const uint16_t *src);
+MODBUS_EXPORT float modbus_get_float_cdab(const uint16_t *src);
 
-LIBMODBUS_EXPORT void modbus_set_float(float f, uint16_t *dest);
-LIBMODBUS_EXPORT void modbus_set_float_abcd(float f, uint16_t *dest);
-LIBMODBUS_EXPORT void modbus_set_float_dcba(float f, uint16_t *dest);
-LIBMODBUS_EXPORT void modbus_set_float_badc(float f, uint16_t *dest);
-LIBMODBUS_EXPORT void modbus_set_float_cdab(float f, uint16_t *dest);
+MODBUS_EXPORT void modbus_set_float(float f, uint16_t *dest);
+MODBUS_EXPORT void modbus_set_float_abcd(float f, uint16_t *dest);
+MODBUS_EXPORT void modbus_set_float_dcba(float f, uint16_t *dest);
+MODBUS_EXPORT void modbus_set_float_badc(float f, uint16_t *dest);
+MODBUS_EXPORT void modbus_set_float_cdab(float f, uint16_t *dest);
 
 #include "modbus-rtu.h"
 #include "modbus-tcp.h"

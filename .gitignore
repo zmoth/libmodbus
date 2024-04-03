@@ -51,3 +51,7 @@ tests/version
 tests/stamp-h2
 
 /*[Bb]uild*
+
+src/config.h
+src/export.h
+src/modbus-version.h

@@ -1053,7 +1053,7 @@ int modbus_reply(modbus_t *ctx,
             uint16_t and = (req[offset + 3] << 8) + req[offset + 4];
             uint16_t or = (req[offset + 5] << 8) + req[offset + 6];
 
-            data = (data & and) | (or &(~and));
+            data = (data & and) | (or &(~and) );
             mb_mapping->tab_registers[mapping_address] = data;
             memcpy(rsp, req, req_length);
             rsp_length = req_length;
@@ -2030,7 +2030,7 @@ void modbus_mapping_free(modbus_mapping_t *mb_mapping)
     free(mb_mapping);
 }
 
-#ifndef HAVE_STRLCPY
+#ifdef _WIN32
 /*
  * Function strlcpy was originally developed by
  * Todd C. Miller <Todd.Miller@courtesan.com> to simplify writing secure code.

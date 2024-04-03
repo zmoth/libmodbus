@@ -1,4 +1,4 @@
-project(libmodbus_tcp_master)
+project(modbus_tcp_master)
 
 message(STATUS "[example] 项目名称 ${PROJECT_NAME}")
 
@@ -7,14 +7,14 @@ file(GLOB_RECURSE INCS *.hpp *.h)
 
 add_executable(${PROJECT_NAME} ${SRCS} ${INCS})
 
-target_link_libraries(${PROJECT_NAME} libmodbus)
+target_link_libraries(${PROJECT_NAME} modbus)
 
 target_include_directories(
     ${PROJECT_NAME}
     PRIVATE $<BUILD_INTERFACE:${CMAKE_BINARY_DIR}/include>
     PRIVATE $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}>
-    PRIVATE $<BUILD_INTERFACE:${libmodbus_SOURCE_DIR}/src>
-    PRIVATE $<BUILD_INTERFACE:${libmodbus_BINARY_DIR}/libmodbus>
+    PRIVATE $<BUILD_INTERFACE:${modbus_SOURCE_DIR}/src>
+    PRIVATE $<BUILD_INTERFACE:${modbus_BINARY_DIR}/modbus>
 )
 
 # 设置编译器选项
