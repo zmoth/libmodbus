@@ -1,4 +1,4 @@
-project(modbus_tcp_master)
+project(modbus_tcp_slave)
 
 message(STATUS "[example] 项目名称 ${PROJECT_NAME}")
 
